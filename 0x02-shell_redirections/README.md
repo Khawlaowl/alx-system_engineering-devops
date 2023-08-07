@@ -1,2 +1,1 @@
-#!/bin/bash
-$ wc -l 0-hello_world
+0x02. Shell, I/O Redirections and filters
