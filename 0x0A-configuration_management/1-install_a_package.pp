@@ -1,5 +1,8 @@
 # 1-install_a_package.pp
-
+package { 'puppet-lint':
+  ensure   => '2.5.0',
+  provider => 'gem'
+}
 # Ensure pip3 is installed
 package { 'python3-pip':
   ensure => installed,
