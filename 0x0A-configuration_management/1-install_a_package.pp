@@ -1,18 +1,11 @@
-# 1-install_a_package.pp
-
-# Ensure pip3 is installed
-package { 'python3-pip':
-  ensure => installed,
-}
-
-# Install Flask using pip3
-package { 'Flask':
+# install flask from pip3.
+package {'flask':
   ensure   => '2.1.0',
-  provider => 'pip3',
+  provider => 'pip3'
 }
 
-# Install puppet-lint gem
-package { 'puppet-lint':
-  ensure   => '2.5.0',
-  provider => 'gem',
+# Ensure Werkzeug version 2.1
+package { 'Werkzeug':
+  ensure   => '2.1.1',
+  provider => 'pip3',
 }
