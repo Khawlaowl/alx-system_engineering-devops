@@ -21,7 +21,21 @@ defaults
         log     global
         mode    http
         option  httplog
-        option  dontlognull
+        option  dontlognull mode http
+        http-request redirect scheme https code 301 unless { ssl_fc }
+        http-request set-header X_Forwarded-Proto http
+        default_backend all-app-backend
+
+frontend all-app-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/www.all-app.tech.pem
+        http-request set-header X-Forwarded-Proto https
+        default_backend all-app-backend
+
+backend all-app-backend
+        balance roundrobin
+        server 151666-web-01 54.237.94.162:80 check
+        server 151666-web-02 52.91.135.236:80 check
+                                                                                                                                                      51,1          Bot
         timeout connect 5000
         timeout client  50000
         timeout server  50000
@@ -35,17 +49,4 @@ defaults
 
 frontend all-app-frontend
         bind *:80
-        mode http
-        http-request redirect scheme https code 301 unless { ssl_fc }
-        http-request set-header X_Forwarded-Proto http
-        default_backend clickviral-backend
-
-frontend all-app-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.all-app.tech.pem
-        http-request set-header X-Forwarded-Proto https
-        default_backend clickviral-backend
-
-backend all-app-tech-backend
-        balance roundrobin
-        server 151666-web-01 54.237.94.162:80 check
-        server 151666-web-02 52.91.135.236:80 check
+        
