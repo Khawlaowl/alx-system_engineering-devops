@@ -45,7 +45,7 @@ frontend all-app-frontend-https
         http-request set-header X-Forwarded-Proto https
         default_backend clickviral-backend
 
-backend clickviral-tech-backend
+backend all-app-tech-backend
         balance roundrobin
         server 151666-web-01 54.237.94.162:80 check
         server 151666-web-02 52.91.135.236:80 check
